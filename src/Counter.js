@@ -26,18 +26,26 @@ class Counter extends React.Component {
         // Then set the new currentValue in state
         // but I must call this.setState
         //  I cannot alter this.state directly
-
-        this.setState({
-            currentValue: newCurrentValue
-        });
+        if (this.state.currentValue < 100) {
+            this.setState({
+                currentValue: newCurrentValue
+            });
+        }
     }
+
+    // This helper function isn't used since we used an anonymous fn with onClick below
+    // _reportMyId = (event) => {
+    //     this.props.doClick(this.props.id);
+    // }
     
     // Rule #2: must have render method
     render() {
         //  Rule #3: must return some JSX
         //  or a call to React.createElement
         return (
-            <div className='counter'>
+            <div className='counter'
+            onClick={() => { this.props.doClick(this.props.id)}}
+            >
                 {this.state.currentValue}
             </div>
         );
